@@ -2528,7 +2528,7 @@ progress {
 
 .table-primary {
   --bs-table-color:#f7e0ff;
-  --bs-table-bg:#f7e0ff;
+  --bs-table-bg:#fae9ff;
   --bs-table-border-color:#f7e0ff;
   --bs-table-striped-bg: #d4d8ee;
   --bs-table-striped-color: #000;
@@ -2710,7 +2710,7 @@ progress {
 .form-text {
   margin-top: 0.25rem;
   font-size: 0.875em;
-  color: #ff9ad1;
+  color: #f7e0ff;
 }
 
 .form-control {
@@ -2721,9 +2721,9 @@ progress {
   font-weight: 400;
   line-height: 1.4rem;
   color: #495057;
-  background-color: #ff9ad1;
+  background-color: #f7e0ff;
   background-clip: padding-box;
-  border: 1px solid #ff9ad1;
+  border: 1px solid #f7e0ff;
   appearance: none;
   border-radius: 0.5rem;
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
@@ -2745,7 +2745,7 @@ progress {
 
 .form-control:focus {
   color: #495057;
-  background-color:#ff9ad1;
+  background-color:#f7e0ff;
   border-color: #5e72e4;
   outline: 0;
   box-shadow: 0 3px 9px rgba(50, 50, 9, 0), 3px 4px 8px rgba(94, 114, 228, 0.1);
