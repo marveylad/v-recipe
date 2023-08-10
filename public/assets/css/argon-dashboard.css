@@ -2446,15 +2446,15 @@ progress {
 }
 
 .table {
-  --bs-table-color: #67748e;
+  --bs-table-color: #a28cbd;
   --bs-table-bg: transparent;
   --bs-table-border-color: #e9ecef;
   --bs-table-accent-bg: transparent;
-  --bs-table-striped-color: #67748e;
+  --bs-table-striped-color: #a28cbd;
   --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-  --bs-table-active-color: #67748e;
+  --bs-table-active-color: #a28cbd;
   --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-  --bs-table-hover-color: #67748e;
+  --bs-table-hover-color: #a28cbd;
   --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
   width: 100%;
   margin-bottom: 1rem;
@@ -2788,7 +2788,7 @@ progress {
 }
 
 .form-control:hover:not(:disabled):not([readonly])::file-selector-button {
-  background-color: #f2f2f2;
+  background-color: #e1b4ff;
 }
 
 .form-control-plaintext {
