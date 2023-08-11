@@ -100,7 +100,7 @@
           <div class="col-lg-12">
             <div class="card">
               <!-- Form - (Update Foto) -->
-              <form action="/update/recipes" method="post">
+              <form action="/update/recipes" method="post" enctype="multipart/form-data">
                 <div class="card-header pb-0 p-3">
                   <h6 class="mb-0">Update V-Recipe</h6>
                 </div>
@@ -113,6 +113,10 @@
                         <input id="titleUpdate" name="titleUpdate" type="text" class="form-control form-control-lg" placeholder="V-Recipe Title" required />
                       </div>
                     </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label" for="photoUpload">Photos</label>
+                    <input type="file" class="form-control" id="imageURL" name="file" required />
                   </div>
                   <div class="row">
                     <div class="col-md-12">
@@ -153,24 +157,30 @@
         const recipeList = document.getElementById("recipeList");
         data.forEach((recipe) => {
           const recipeDiv = document.createElement("div");
-          recipeDiv.className = "col-md-6";
+          recipeDiv.className = "col-md-3";
           recipeDiv.innerHTML = `
               <ul class="list-group" id="galleryList">
                 <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg align-items-center">
+                  <div class="row">
+                    <div class="col-md-12 list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg align-items-center">
+                      <div>
+                        <img src="${recipe.imageURL}" class="avatar avatar-sm-photo me-3" alt="user1" />
+                      </div>
+                      <div class="d-flex flex-column w-50">
+                        <h4 class="mb-3">${recipe.title}</h4>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="w-25 d-flex">
+                        <button data-recipeid="${recipe.id}" data-recipetitle="${recipe.title}" data-recipeingredients="${recipe.ingredients}" data-recipedirections="${recipe.directions}" class="btn btn-link text-dark px-3 mb-0 editButton" href="javascript:;" data-bs-toggle="modal" data-bs-target="#addPhotoModal">
+                          <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit
+                        </button>
+                        <button data-recipeid="${recipe.id}" class="btn btn-link text-danger text-gradient px-3 mb-0 deleteButton" type="button">
+                          <i class="far fa-trash-alt me-2"></i>Delete
+                        </button>
+                      </div>
+                    </div>
                   <div>
-                    <img src="./assets/img/collectionfood.png" class="avatar avatar-sm-photo me-3" alt="user1" />
-                  </div>
-                  <div class="d-flex flex-column w-75">
-                    <h3 class="mb-3 text-sm">${recipe.title}</h3>
-                  </div>
-                  <div class="w-25 ms-auto text-end">
-                    <button data-recipeid="${recipe.id}" data-recipetitle="${recipe.title}" data-recipeingredients="${recipe.ingredients}" data-recipedirections="${recipe.directions}" class="btn btn-link text-dark px-3 mb-0 editButton" href="javascript:;" data-bs-toggle="modal" data-bs-target="#addPhotoModal">
-                      <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit
-                    </button>
-                    <button data-recipeid="${recipe.id}" class="btn btn-link text-danger text-gradient px-3 mb-0 deleteButton" type="button">
-                      <i class="far fa-trash-alt me-2"></i>Delete
-                    </button>
-                  </div>
                 </li>
               </ul>
           `;

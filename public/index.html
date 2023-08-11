@@ -87,10 +87,14 @@
                   </div>
                   <div class="card-body">
                     <!-- Form -->
-                    <form action="/create/recipes" method="post">
+                    <form action="/create/recipes" method="post" enctype="multipart/form-data">
                       <div class="mb-3">
                         <label for="title" class="form-control-label">Title</label>
                         <input id="title" name="title" type="text" class="form-control form-control-lg" placeholder="V-Recipe Title" required />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label" for="photoUpload">Photos</label>
+                        <input type="file" class="form-control" id="imageURL" name="file" required />
                       </div>
                       <div class="mb-3">
                         <label for="ingredients" class="form-control-label">Ingredients</label>
@@ -112,8 +116,7 @@
                   class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                   style="background-image: url('../../assets/img/homephotos.jpg'); background-size: cover"
                 >
-                  
-                  <h4 class="mt-5 text-white font-weight-bolder position-relative"> WELCOME TO V-RECIPE!</h4> 
+                  <h4 class="mt-5 text-white font-weight-bolder position-relative">WELCOME TO V-RECIPE!</h4>
                   <p class="text-white position-relative">"We are here to help you on making and finding your needs of recipes"</p>
                 </div>
               </div>

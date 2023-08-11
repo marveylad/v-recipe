@@ -2527,9 +2527,9 @@ progress {
 }
 
 .table-primary {
-  --bs-table-color:#f7e0ff;
-  --bs-table-bg:#fae9ff;
-  --bs-table-border-color:#f7e0ff;
+  --bs-table-color: #f7e0ff;
+  --bs-table-bg: #fae9ff;
+  --bs-table-border-color: #f7e0ff;
   --bs-table-striped-bg: #d4d8ee;
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #c9cce1;
@@ -2543,7 +2543,7 @@ progress {
 .table-secondary {
   --bs-table-color: #000;
   --bs-table-bg: #f7e0ff;
-  --bs-table-border-color:#f7e0ff;
+  --bs-table-border-color: #f7e0ff;
   --bs-table-striped-bg: #dbdde2;
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #cfd2d6;
@@ -2612,8 +2612,8 @@ progress {
 
 .table-light {
   --bs-table-color: #000;
-  --bs-table-bg:#f7e0ff;
-  --bs-table-border-color:#f7e0ff;
+  --bs-table-bg: #f7e0ff;
+  --bs-table-border-color: #f7e0ff;
   --bs-table-striped-bg: #dde0e3;
   --bs-table-striped-color: #000;
   --bs-table-active-bg: #d2d4d7;
@@ -2626,7 +2626,7 @@ progress {
 
 .table-dark {
   --bs-table-color: #f7e0ff;
-  --bs-table-bg:#f7e0ff;
+  --bs-table-bg: #f7e0ff;
   --bs-table-border-color: #f7e0ff;
   --bs-table-striped-bg: #3e506f;
   --bs-table-striped-color: #fff;
@@ -2745,7 +2745,7 @@ progress {
 
 .form-control:focus {
   color: #495057;
-  background-color:#ebe2ff;
+  background-color: #ebe2ff;
   border-color: #5e72e4;
   outline: 0;
   box-shadow: 0 3px 9px rgba(50, 50, 9, 0), 3px 4px 8px rgba(94, 114, 228, 0.1);
@@ -20129,8 +20129,8 @@ fieldset:disabled .btn {
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
-  height: 10vh;
-  width: 10vh;
+  height: 15vh;
+  width: 15vh;
   transition: all 0.2s ease-in-out;
 }
 

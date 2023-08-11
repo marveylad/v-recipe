@@ -11,6 +11,7 @@ const admin = require("firebase-admin");
 const credentials = require("./key.json");
 admin.initializeApp({
   credential: admin.credential.cert(credentials),
+  storageBucket: "gs://v-recipe-6ed4a.appspot.com",
 });
 
 //API Middlewares
@@ -33,20 +34,49 @@ app.get("/user", (req, res) => {
 const db = admin.firestore();
 const auth = admin.auth();
 
-// Create - Recipe;
-app.post("/create/recipes", async (req, res) => {
-  try {
-    console.log(req.body); // untuk menampilkan data yang di input di terminal
-    const userJson = {
-      title: req.body.title,
-      ingredients: req.body.ingredients,
-      directions: req.body.directions,
-    };
-    const response = await db.collection("recipes").add(userJson);
-    res.redirect("/dashboard");
-  } catch (error) {
-    res.send(error);
-  }
+// Create - Recipe
+app.post("/create/recipes", (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).send("Error uploading file");
+    }
+    try {
+      // Menampilkan Data Text + File Input Dari Form
+      console.log(req.body);
+      console.log(req.file);
+
+      // Ngumpulin data Input
+      const recipes = {
+        title: req.body.title,
+        ingredients: req.body.ingredients,
+        directions: req.body.directions,
+        imageURL: "",
+      };
+
+      //Data Siap
+      const response = await db.collection("recipes").add(recipes);
+
+      // Upload gambar ke Firebase Storage
+      const bucket = admin.storage().bucket();
+      const file = req.file;
+      const fileRef = bucket.file(`${file.originalname}`);
+      await fileRef.save(file.buffer);
+
+      // Mendapatkan URL gambar dari Firebase Storage
+      const imageURL = await fileRef.getSignedUrl({
+        action: "read",
+        expires: "01-01-2030",
+      });
+
+      // Memperbarui isi imageURL Dalam Data Siap
+      await response.update({ imageURL: imageURL });
+
+      // Eksekusi
+      res.redirect("/dashboard");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
 });
 
 // Read - Recipe
@@ -64,6 +94,7 @@ app.get("/read/recipes", async (req, res) => {
         title: data.title,
         ingredients: data.ingredients,
         directions: data.directions,
+        imageURL: data.imageURL,
       });
     });
     res.send(recipe);
@@ -73,22 +104,47 @@ app.get("/read/recipes", async (req, res) => {
 });
 
 // Update - Recipe
-app.post("/update/recipes", async (req, res) => {
-  try {
-    console.log(req.body); // untuk menampilkan data yang di input di terminal
-    const newId = req.body.idUpdate;
-    const newTitle = req.body.titleUpdate;
-    const newIngredients = req.body.ingredientsUpdate;
-    const newDirections = req.body.directionsUpdate;
-    const response = await db.collection("recipes").doc(newId).update({
-      title: newTitle,
-      ingredients: newIngredients,
-      directions: newDirections,
-    });
-    res.redirect("/collection");
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
+app.post("/update/recipes", (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).send("Error uploading file");
+    }
+    try {
+      // Menampilkan Data Text + File Input Dari Form
+      console.log(req.body);
+      console.log(req.file);
+
+      // Ngambil Id + Data Waktu
+      const recipeId = req.body.idUpdate;
+
+      // Upload gambar ke Firebase Storage
+      const bucket = admin.storage().bucket();
+      const file = req.file;
+      const fileRef = bucket.file(`${file.originalname}`);
+      await fileRef.save(file.buffer);
+
+      // Mendapatkan URL gambar dari Firebase Storage
+      const imageURLUpdate = await fileRef.getSignedUrl({
+        action: "read",
+        expires: "01-01-2030",
+      });
+
+      // Ngumpulin data baru Input
+      const newRecipe = {
+        title: req.body.titleUpdate,
+        ingredients: req.body.ingredientsUpdate,
+        directions: req.body.directionsUpdate,
+        imageURL: imageURLUpdate,
+      };
+
+      // Eksekusi
+      await db.collection("recipes").doc(recipeId).update(newRecipe);
+
+      res.redirect("/collection");
+    } catch (error) {
+      res.status(500).redirect("/collection");
+    }
+  });
 });
 
 // Delete - Recipe
